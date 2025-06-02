@@ -1,0 +1,35 @@
+<!-- https://mujoco.readthedocs.io/en/latest/overview.html?highlight=hello.xml#examples -->
+<mujoco>
+  <compiler meshdir="meshes"/>
+  <asset>
+    <mesh name="Brazo1" file="Brazo 1 Nuevo.STL" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="Brazo2" file="brazo 2 Nuevo.STL" scale= "0.0045 0.0045 0.0045"/>
+    <mesh name="Base" file="base.STL" scale= "0.0045 0.0045 0.0045"/>
+    
+  </asset>
+
+  <option gravity="0 0 -9.81"/>
+
+  <worldbody>
+    <light diffuse="0 0 0" pos="0 0 10" dir="0 0 -1"/>
+    <body pos="0 0 0" euler="0 180 0">
+    <inertial pos="0 0 0" mass="0.35"   diaginertia="0.00011089 0.00140180 0.00134619"/>
+      <joint name="joint0" type="hinge" axis="0 1.1 0" pos="0.04 0 1.02" damping = "0.002" />
+      <geom type="mesh" mesh="Brazo1" rgba="1 0 1 1" mass="0.35" />
+      <body pos="0 -0.15 -0.9" euler="0 0 0">
+      <inertial pos="0 0 -0.9" mass="0.35"   diaginertia="0.00011089 0.00140180 0.00134619"/>
+       <joint name="joint1" type="hinge" axis="0 1.1 0" pos="0.04 0 1.02" damping = "0.002"/>
+       <geom type="mesh" mesh="Brazo2" rgba="0 1 0 1" mass="0.35"/>
+      </body>
+    </body>
+      <body name="extra" pos="0.255 0.2 -1.455"euler="90 180 0">
+      <geom type="mesh" mesh="Base" rgba="0.5 0.5 0.5 1" mass="0.001"/>
+      </body>
+  </worldbody>
+
+  <actuator>
+
+    <motor name="torque0" joint="joint0" gear="1"/>
+    <motor name="torque1" joint="joint1" gear="1"/>
+  </actuator>
+</mujoco>
